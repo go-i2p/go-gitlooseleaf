@@ -55,17 +55,9 @@ func MultiGetListener(network, address string) (net.Listener, error) {
 }
 
 // We use `init() to ensure that the appropriate Listeners and Dialers are correctly placed at runtime
-// We use `init() to ensure that the I2P Listeners and Dialers are correctly placed at runtime`
 func init() {
 	GetListener = MultiGetListener
-	/*httpClient := &http.Client{
-		Transport: &http.Transport{
-			Dial: garlic.Dial,
-		},
-	}
-
-	http.DefaultClient = httpClient
-	http.DefaultTransport = httpClient.Transport*/
+	/*Dialer not shown here*/
 }
 
 ```
