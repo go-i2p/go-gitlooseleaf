@@ -76,7 +76,7 @@ jobs:
         run: |
           make clean
           cp -v ../net_mirror.go modules/graceful/net_mirror.go
-          cp -v ../net_mirror.go modules/graceful/net_mirror_dialer.go
+          cp -v ../net_mirror_dialer.go modules/graceful/net_mirror_dialer.go
           cp -v ../net_mirror_unix.go modules/graceful/net_mirror_unix.go
           cp -v ../net_mirror_windows.go modules/graceful/net_mirror_windows.go
           go mod tidy
