@@ -12,10 +12,7 @@ import (
 
 // This implements the GetListener function for TLS, I2P, and Onion. Note the exemption for Unix sockets.
 func MultiGetListener(network, address string) (net.Listener, error) {
-	EMAIL, err := os.Getenv("EMAIL")
-	if err != nil {
-		return nil, err
-	}
+	EMAIL := os.Getenv("EMAIL")
 	if EMAIL == "" {
 		return nil, fmt.Errorf("EMAIL environment variable not set, TLS not possible")
 	}
