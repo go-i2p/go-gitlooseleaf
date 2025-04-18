@@ -3,6 +3,7 @@ package graceful
 
 import (
 	"fmt"
+	"log"
 	"net"
 	"net/http"
 	"os"
@@ -14,7 +15,9 @@ import (
 func MultiGetListener(network, address string) (net.Listener, error) {
 	EMAIL := os.Getenv("EMAIL")
 	if EMAIL == "" {
-		return nil, fmt.Errorf("EMAIL environment variable not set, TLS not possible")
+		log.Printf("Warning: %s", fmt.Errorf("EMAIL environment variable not set, TLS not possible"))
+	} else {
+		log.Printf("Using %s as email for TLS", EMAIL)
 	}
 	// Add a deferral to say that we've tried to grab a listener
 	defer GetManager().InformCleanup()
