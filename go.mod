@@ -3,8 +3,8 @@ module github.com/go-i2p/go-gittisane
 go 1.23.5
 
 require (
-	github.com/go-i2p/go-meta-listener v0.0.0-20250410230532-cbd126ff4d54
-	github.com/go-i2p/onramp v0.33.92 // indirect
+	github.com/go-i2p/go-meta-listener v0.0.0-20250418213550-d9fc6472db56
+	github.com/go-i2p/onramp v0.33.92
 )
 
 require (
