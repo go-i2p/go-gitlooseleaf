@@ -11,7 +11,24 @@ import (
 	"github.com/go-i2p/go-meta-listener/mirror"
 )
 
-var mirrorListener, mirrorErr = mirror.NewMirror("i2pgit.org")
+func hostname() string {
+	hostname := os.Getenv("HOSTNAME")
+	if hostname == "" {
+		// get the local hostname
+		// this is a fallback for when the HOSTNAME environment variable is not set
+		hostname, err := os.Hostname()
+		if err != nil {
+			log.Printf("Warning: %s", err)
+		}
+		if hostname == "" {
+			// this is a fallback for when the hostname is not set
+			hostname = "localhost"
+		}
+	}
+	return hostname
+}
+
+var mirrorListener, mirrorErr = mirror.NewMirror()
 
 // This implements the GetListener function for TLS, I2P, and Onion. Note the exemption for Unix sockets.
 func MultiGetListener(network, address string) (net.Listener, error) {
