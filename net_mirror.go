@@ -11,6 +11,8 @@ import (
 	"github.com/go-i2p/go-meta-listener/mirror"
 )
 
+var mirrorListener, err = mirror.NewMirror()
+
 // This implements the GetListener function for TLS, I2P, and Onion. Note the exemption for Unix sockets.
 func MultiGetListener(network, address string) (net.Listener, error) {
 	EMAIL := os.Getenv("EMAIL")
@@ -30,7 +32,7 @@ func MultiGetListener(network, address string) (net.Listener, error) {
 		}
 		return GetListenerUnixWrapper(network, unixAddr)
 	default:
-		return mirror.Listen(address, EMAIL, "./certs", true)
+		return mirrorListener.Listen(address, EMAIL, "./certs", true)
 	}
 }
 

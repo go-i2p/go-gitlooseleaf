@@ -4,8 +4,8 @@ github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSs
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc h1:U9qPSI2PIWSS1VwoXQT9A3Wy9MM3WgvqSxFWenqJduM=
 github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
-github.com/go-i2p/go-meta-listener v0.0.0-20250418235440-6c2baec119fe h1:HSDx989+hXkiydq+xEN0CA0A6RqqaPEz82xO79XxxOU=
-github.com/go-i2p/go-meta-listener v0.0.0-20250418235440-6c2baec119fe/go.mod h1:wF/MCCfB40gZyT9WtuYWQkUOPrnoTzA+NG0zpsy3s4M=
+github.com/go-i2p/go-meta-listener v0.0.0-20250419002529-47fca00a1b39 h1:z4Dw4Mhqht9yvRf4yk0m1apwiKCVh1rHIqJQgMzEfos=
+github.com/go-i2p/go-meta-listener v0.0.0-20250419002529-47fca00a1b39/go.mod h1:wF/MCCfB40gZyT9WtuYWQkUOPrnoTzA+NG0zpsy3s4M=
 github.com/go-i2p/i2pkeys v0.0.0-20241108200332-e4f5ccdff8c4/go.mod h1:m5TlHjPZrU5KbTd7Lr+I2rljyC6aJ88HdkeMQXV0U0E=
 github.com/go-i2p/i2pkeys v0.33.10-0.20241113193422-e10de5e60708 h1:Tiy9IBwi21maNpK74yCdHursJJMkyH7w87tX1nXGWzg=
 github.com/go-i2p/i2pkeys v0.33.10-0.20241113193422-e10de5e60708/go.mod h1:m5TlHjPZrU5KbTd7Lr+I2rljyC6aJ88HdkeMQXV0U0E=
