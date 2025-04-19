@@ -28,7 +28,7 @@ func hostname() string {
 	return hostname
 }
 
-var mirrorListener, mirrorErr = mirror.NewMirror()
+var mirrorListener, mirrorErr = mirror.NewMirror(hostname())
 
 // This implements the GetListener function for TLS, I2P, and Onion. Note the exemption for Unix sockets.
 func MultiGetListener(network, address string) (net.Listener, error) {
