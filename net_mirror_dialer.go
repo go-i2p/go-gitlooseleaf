@@ -8,8 +8,10 @@ import (
 	"github.com/go-i2p/onramp"
 )
 
-var Garlic, GarlicErr = onramp.NewGarlic("git-looseleaf", "127.0.0.1:7656", onramp.OPT_WIDE)
-var Onion, OnionErr = onramp.NewOnion("git-looseleaf")
+var (
+	Garlic, GarlicErr = onramp.NewGarlic("git-looseleaf", "127.0.0.1:7656", onramp.OPT_WIDE)
+	Onion, OnionErr   = onramp.NewOnion("git-looseleaf")
+)
 
 func Dial(network, addr string) (net.Conn, error) {
 	// convert the addr to a URL
