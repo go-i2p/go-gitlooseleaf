@@ -11,10 +11,13 @@ import (
 	"github.com/go-i2p/go-meta-listener/mirror"
 )
 
-var mirrorListener, err = mirror.NewMirror("i2pgit.org")
+var mirrorListener, mirrorErr = mirror.NewMirror("i2pgit.org")
 
 // This implements the GetListener function for TLS, I2P, and Onion. Note the exemption for Unix sockets.
 func MultiGetListener(network, address string) (net.Listener, error) {
+	if mirrorErr != nil {
+		return nil, mirrorErr
+	}
 	EMAIL := os.Getenv("EMAIL")
 	if EMAIL == "" {
 		log.Printf("Warning: %s", fmt.Errorf("EMAIL environment variable not set, TLS not possible"))
