@@ -1,0 +1,92 @@
+name: Gitea Nightly Build
+on:
+  push:  # Run on any push
+  schedule:
+    - cron: '0 0 * * *'  # Runs daily at midnight UTC
+  workflow_dispatch:      # Allow manual triggers
+
+permissions:
+  contents: write        # Required for creating releases
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 120  # 2-hour timeout
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.21'
+          cache: true
+
+      - name: Checkout Gitea Source
+        uses: actions/checkout@v4
+        with:
+          repository: go-gitea/gitea
+          ref: main  # Always use the latest main branch
+          path: gitea-source
+
+      - name: Build Gitea
+        working-directory: gitea-source
+        run: |
+          make clean
+          cp -v ../net_mirror.go modules/graceful/net_mirror.go
+          cp -v ../net_mirror_dialer.go modules/graceful/net_mirror_dialer.go
+          cp -v ../net_mirror_unix.go modules/graceful/net_mirror_unix.go
+          cp -v ../net_mirror_windows.go modules/graceful/net_mirror_windows.go
+          go mod tidy
+          make build
+        env:
+          TAGS: bindata sqlite sqlite_unlock_notify netgo osusergo
+          GOFLAGS: -ldflags="-extldflags=-static"
+          CO_ENABLED: 0
+          
+      - name: Prepare Artifact
+        shell: bash
+        run: |
+          cd gitea-source
+          ARTIFACT_NAME="gitea-${{ runner.os }}"
+          if [ "${{ runner.os }}" = "Windows" ]; then
+            mv gitea.exe "${ARTIFACT_NAME}.exe"
+          else
+            mv gitea "${ARTIFACT_NAME}"
+          fi
+
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: gitea-${{ runner.os }}
+          path: |
+            gitea-source/gitea-${{ runner.os }}*
+          retention-days: 1
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download All Artifacts
+        uses: actions/download-artifact@v4
+
+      - name: Get Current Date
+        id: date
+        run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
+
+      - name: Create or Update Nightly Release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: nightly
+          name: "Gitea Nightly Build (${{ steps.date.outputs.date }})"
+          body: "Automated nightly build of Gitea from main branch, built on ${{ steps.date.outputs.date }}"
+          artifacts: "gitea-Linux/*, gitea-Windows/*, gitea-macOS/*"
+          draft: false
+          prerelease: true
+          allowUpdates: true
+          removeArtifacts: false
+          replacesArtifacts: true
