@@ -6,6 +6,8 @@ github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc h1:U9qPSI2PIWSS1
 github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/go-i2p/go-limit v0.0.0-20250203203118-210616857c15 h1:ASjMbwlepoDQfrhv+H2B5ICBPJU5ES1JzmOxzPDx3YQ=
 github.com/go-i2p/go-limit v0.0.0-20250203203118-210616857c15/go.mod h1:4jjmVRhvKj47sQ6B6wdDhN1IrEZunE6KwkYLQx/BeVE=
+github.com/go-i2p/go-meta-dialer v0.0.0-20250501024057-715e91be3cfe h1:9Rxw2KtMCRKZHI4WavUAaatzKmc64V6kiYvcyTMHjeU=
+github.com/go-i2p/go-meta-dialer v0.0.0-20250501024057-715e91be3cfe/go.mod h1:++xHSOvnGymRSyFbi9A9hztcfwKfU6/nJAtVxrNo8Zo=
 github.com/go-i2p/go-meta-listener v0.0.4-0.20250501044535-ab41cecda529 h1:NjoB0lFjeIumL2r4h+ychfelK6Fnjsi2Lt9ia9exvf8=
 github.com/go-i2p/go-meta-listener v0.0.4-0.20250501044535-ab41cecda529/go.mod h1:wF/MCCfB40gZyT9WtuYWQkUOPrnoTzA+NG0zpsy3s4M=
 github.com/go-i2p/i2pkeys v0.0.0-20241108200332-e4f5ccdff8c4/go.mod h1:m5TlHjPZrU5KbTd7Lr+I2rljyC6aJ88HdkeMQXV0U0E=
