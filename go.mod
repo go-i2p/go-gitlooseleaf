@@ -3,6 +3,7 @@ module github.com/go-i2p/go-gittisane
 go 1.23.5
 
 require (
+	github.com/go-i2p/go-limit v0.0.0-20250203203118-210616857c15
 	github.com/go-i2p/go-meta-listener v0.0.4-0.20250501044535-ab41cecda529
 	github.com/go-i2p/onramp v0.33.92
 )
@@ -21,4 +22,5 @@ require (
 	golang.org/x/net v0.34.0 // indirect
 	golang.org/x/sys v0.29.0 // indirect
 	golang.org/x/text v0.21.0 // indirect
+	golang.org/x/time v0.9.0 // indirect
 )

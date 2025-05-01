@@ -9,6 +9,8 @@ import (
 	"os"
 
 	"github.com/go-i2p/go-meta-listener/mirror"
+
+	limitedlistener "github.com/go-i2p/go-limit"
 )
 
 func hostname() string {
@@ -51,8 +53,16 @@ func MultiGetListener(network, address string) (net.Listener, error) {
 			return nil, err
 		}
 		return GetListenerUnixWrapper(network, unixAddr)
+
 	default:
-		return mirrorListener.Listen(address, EMAIL, "./certs", true)
+		ml, err := mirrorListener.Listen(address, EMAIL, "./certs", true)
+		if err != nil {
+			return nil, err
+		}
+		return limitedlistener.NewLimitedListener(ml,
+			limitedlistener.WithMaxConnections(500), // max concurrent
+			limitedlistener.WithRateLimit(24),       // per second
+		), nil
 	}
 }
 
