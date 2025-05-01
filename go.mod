@@ -3,7 +3,7 @@ module github.com/go-i2p/go-gittisane
 go 1.23.5
 
 require (
-	github.com/go-i2p/go-meta-listener v0.0.4-0.20250501040651-87fc3e211374
+	github.com/go-i2p/go-meta-listener ab41cecda529dbc0dd71427b7e30659cd63b916c
 	github.com/go-i2p/onramp v0.33.92
 )
 
