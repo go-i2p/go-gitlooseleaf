@@ -7,5 +7,8 @@ import (
 )
 
 func Dial(network, addr string) (net.Conn, error) {
+	if metadialer.ANON {
+		metadialer.ANON = false
+	}
 	return metadialer.Dial(network, addr)
 }
