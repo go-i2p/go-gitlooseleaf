@@ -1,0 +1,29 @@
+[Unit]
+Description=Gitea (Modified with multi-protocol TLS/I2P/Tor support)
+Documentation=https://github.com/go-i2p/go-gitlooseleaf
+After=network.target postgresql.service mysql.service mariadb.service
+Wants=network.target
+
+[Service]
+Type=simple
+User=git
+Group=git
+WorkingDirectory=/var/lib/gitea
+ExecStart=/usr/local/bin/gitea web --config /etc/gitea/app.ini
+Restart=always
+RestartSec=10
+Environment=USER=git HOME=/home/git GITEA_WORK_DIR=/var/lib/gitea
+
+# Hardening measures
+ProtectSystem=full
+PrivateTmp=true
+PrivateDevices=true
+NoNewPrivileges=true
+ReadWritePaths=/var/lib/gitea /etc/gitea
+AmbientCapabilities=CAP_NET_BIND_SERVICE
+
+# Load user-modifiable configuration from drop-in directory
+# This will automatically include all .conf files in gitea.service.d/
+
+[Install]
+WantedBy=multi-user.target
