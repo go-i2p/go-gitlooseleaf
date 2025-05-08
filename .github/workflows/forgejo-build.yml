@@ -85,19 +85,19 @@ jobs:
         shell: bash
         run: |
           cd forgejo-source
-          ARTIFACT_NAME="forgejo-${{ runner.os }}"
+          ARTIFACT_NAME="gitea-${{ runner.os }}"
           if [ "${{ runner.os }}" = "Windows" ]; then
-            mv forgejo.exe "${ARTIFACT_NAME}.exe"
+            mv gitea.exe "${ARTIFACT_NAME}.exe"
           else
-            mv forgejo "${ARTIFACT_NAME}"
+            mv gitea "${ARTIFACT_NAME}"
           fi
 
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: forgejo-${{ runner.os }}
+          name: gitea-${{ runner.os }}
           path: |
-            forgejo-source/forgejo-${{ runner.os }}*
+            forgejo-source/gitea-${{ runner.os }}*
           retention-days: 1
 
   release:
