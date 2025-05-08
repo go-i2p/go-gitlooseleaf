@@ -61,12 +61,10 @@ jobs:
           cache: true
 
       - name: Checkout Forgejo Source
-        uses: actions/checkout@v4
-        with:
-          repository: forgejo/forgejo
-          ref: ${{ needs.check-release.outputs.new_tag }}
-          path: forgejo-source
-          github-server-url: https://codeberg.org
+        run: |
+          git clone https://codeberg.org/forgejo/forgejo.git forgejo-source
+          cd forgejo-source
+          git checkout ${{ needs.check-release.outputs.new_tag }}
 
       - name: Build Forgejo
         working-directory: forgejo-source
