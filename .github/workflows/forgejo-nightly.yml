@@ -29,9 +29,10 @@ jobs:
       - name: Checkout Forgejo Source
         uses: actions/checkout@v4
         with:
-          repository: https://codeberg.org/forgejo/forgejo
+          repository: forgejo/forgejo
           ref: main  # Always use the latest main branch
           path: forgejo-source
+          github-server-url: https://codeberg.org
 
       - name: Build Forgejo
         working-directory: forgejo-source
