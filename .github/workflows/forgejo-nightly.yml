@@ -26,6 +26,12 @@ jobs:
           go-version: '1.21'
           cache: true
 
+      - name: Setup node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+          cache: 'npm'
+
       - name: Checkout Forgejo Source
         run: |
           git clone https://codeberg.org/forgejo/forgejo.git forgejo-source
@@ -51,7 +57,7 @@ jobs:
         shell: bash
         run: |
           cd forgejo-source
-          ARTIFACT_NAME="forgejo-${{ runner.os }}"
+          ARTIFACT_NAME="gitea-${{ runner.os }}"
           if [ "${{ runner.os }}" = "Windows" ]; then
             mv gitea.exe "${ARTIFACT_NAME}.exe"
           else
@@ -61,9 +67,9 @@ jobs:
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: forgejo-${{ runner.os }}
+          name: gitea-${{ runner.os }}
           path: |
-            forgejo-source/forgejo-${{ runner.os }}*
+            forgejo-source/gitea-${{ runner.os }}*
           retention-days: 1
 
   release:

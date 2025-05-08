@@ -59,6 +59,12 @@ jobs:
         with:
           go-version: '1.21'
           cache: true
+      
+      - name: Setup node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+          cache: 'npm'
 
       - name: Checkout Forgejo Source
         run: |
