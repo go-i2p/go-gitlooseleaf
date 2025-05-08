@@ -1,0 +1,126 @@
+name: Forgejo Build Pipeline
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '0 0 * * *'  # Runs daily at midnight UTC
+  workflow_dispatch:      # Allow manual triggers
+
+permissions:
+  contents: write        # Required for creating releases
+
+jobs:
+  check-release:
+    runs-on: ubuntu-latest
+    outputs:
+      new_tag: ${{ steps.get_latest_tag.outputs.tag }}
+      should_build: ${{ steps.check_existing.outputs.should_build }}
+    steps:
+      - name: Get Latest Forgejo Tag
+        id: get_latest_tag
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const response = await github.rest.repos.getLatestRelease({
+              owner: 'forgejo',
+              repo: 'forgejo'
+            });
+            core.setOutput('tag', response.data.tag_name);
+
+      - name: Check Existing Release
+        id: check_existing
+        uses: actions/github-script@v7
+        with:
+          script: |
+            try {
+              const tag = '${{ steps.get_latest_tag.outputs.tag }}';
+              const release = await github.rest.repos.getReleaseByTag({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                tag: tag + '-forgejo'
+              });
+              core.setOutput('should_build', 'false');
+            } catch (error) {
+              core.setOutput('should_build', 'true');
+            }
+
+  build:
+    needs: check-release
+    if: needs.check-release.outputs.should_build == 'true'
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 120  # 2-hour timeout
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.21'
+          cache: true
+
+      - name: Checkout Forgejo Source
+        uses: actions/checkout@v4
+        with:
+          repository: forgejo/forgejo
+          ref: ${{ needs.check-release.outputs.new_tag }}
+          path: forgejo-source
+
+      - name: Build Forgejo
+        working-directory: forgejo-source
+        run: |
+          make clean
+          cp -v ../net_mirror.go modules/graceful/net_mirror.go
+          cp -v ../net_mirror_dialer.go modules/graceful/net_mirror_dialer.go
+          cp -v ../net_mirror_unix.go modules/graceful/net_mirror_unix.go
+          cp -v ../net_mirror_windows.go modules/graceful/net_mirror_windows.go
+          go mod tidy
+          make build
+        env:
+          TAGS: bindata sqlite sqlite_unlock_notify netgo osusergo
+          GOFLAGS: -ldflags="-extldflags=-static"
+          CO_ENABLED: 0
+          
+      - name: Prepare Artifact
+        shell: bash
+        run: |
+          cd forgejo-source
+          ARTIFACT_NAME="forgejo-${{ runner.os }}"
+          if [ "${{ runner.os }}" = "Windows" ]; then
+            mv forgejo.exe "${ARTIFACT_NAME}.exe"
+          else
+            mv forgejo "${ARTIFACT_NAME}"
+          fi
+
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: forgejo-${{ runner.os }}
+          path: |
+            forgejo-source/forgejo-${{ runner.os }}*
+          retention-days: 1
+
+  release:
+    needs: [check-release, build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download All Artifacts
+        uses: actions/download-artifact@v4
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ needs.check-release.outputs.new_tag }}-forgejo
+          name: "Forgejo ${{ needs.check-release.outputs.new_tag }}"
+          body: "Automated build of Forgejo ${{ needs.check-release.outputs.new_tag }}"
+          files: |
+            forgejo-Linux/*
+            forgejo-Windows/*
+            forgejo-macOS/*
+          draft: false
+          prerelease: false
