@@ -30,7 +30,7 @@ jobs:
         run: |
           git clone https://codeberg.org/forgejo/forgejo.git forgejo-source
           cd forgejo-source
-          git checkout main
+          git checkout forgejo
 
       - name: Build Forgejo
         working-directory: forgejo-source
