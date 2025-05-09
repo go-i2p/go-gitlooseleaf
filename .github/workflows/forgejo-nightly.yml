@@ -58,6 +58,7 @@ jobs:
         run: |
           cd forgejo-source
           ARTIFACT_NAME="forgejo-${{ runner.os }}"
+          ls -lah
           if [ "${{ runner.os }}" = "Windows" ]; then
             mv -v *.exe "${ARTIFACT_NAME}.exe"
           else
