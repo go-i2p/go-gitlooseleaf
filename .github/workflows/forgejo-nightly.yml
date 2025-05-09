@@ -57,7 +57,7 @@ jobs:
         shell: bash
         run: |
           cd forgejo-source
-          ARTIFACT_NAME="gitea-${{ runner.os }}"
+          ARTIFACT_NAME="forgejo-${{ runner.os }}"
           if [ "${{ runner.os }}" = "Windows" ]; then
             mv gitea.exe "${ARTIFACT_NAME}.exe"
           else
