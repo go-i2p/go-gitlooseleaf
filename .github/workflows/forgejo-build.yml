@@ -93,9 +93,9 @@ jobs:
           cd forgejo-source
           ARTIFACT_NAME="forgejo-${{ runner.os }}"
           if [ "${{ runner.os }}" = "Windows" ]; then
-            mv gitea.exe "${ARTIFACT_NAME}.exe"
+            mv -v *.exe "${ARTIFACT_NAME}.exe"
           else
-            mv gitea "${ARTIFACT_NAME}"
+            mv -v * "${ARTIFACT_NAME}"
           fi
 
       - name: Upload Build Artifact
