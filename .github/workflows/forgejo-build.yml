@@ -102,7 +102,7 @@ jobs:
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: gitea-${{ runner.os }}
+          name: forgejo-${{ runner.os }}
           path: |
             forgejo-source/forgejo-${{ runner.os }}*
           retention-days: 1
