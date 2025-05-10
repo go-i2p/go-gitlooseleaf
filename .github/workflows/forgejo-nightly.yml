@@ -70,7 +70,7 @@ jobs:
         with:
           name: gitea-${{ runner.os }}
           path: |
-            forgejo-source/gitea-${{ runner.os }}*
+            forgejo-source/forgejo-${{ runner.os }}*
           retention-days: 1
 
   release:
