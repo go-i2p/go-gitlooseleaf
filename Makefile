@@ -1,10 +1,10 @@
 .PHONY: all download setup-user install-binary install-systemd enable disable uninstall clean help
 
 # Installation paths
-BINARY_PATH = /usr/local/bin/gitea
-SYSTEMD_PATH = /etc/systemd/system
-CONFIG_PATH = /etc/gitea
-DATA_PATH = /var/lib/gitea
+BINARY_PATH = ${BASE}/usr/local/bin/gitea
+SYSTEMD_PATH = ${BASE}/etc/systemd/system
+CONFIG_PATH = ${BASE}/etc/gitea
+DATA_PATH = ${BASE}/var/lib/gitea
 
 # Default target
 all: help

@@ -1,0 +1,55 @@
+# Uses the stable build of Gitea to create a Debian package with pkginstall
+# Triggered an hour after the Gitea stable build
+# Runs on Ubuntu 22.04
+
+name: Gitea Nightly Debian Build
+on:
+  push:  # Run on any push
+  schedule:
+    - cron: '0 1 * * *'  # Runs daily at 1 UTC
+  workflow_dispatch:      # Allow manual triggers
+
+permissions:
+  contents: write        # Required for creating releases
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-22.04]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 120  # 2-hour timeout
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.24.3'
+          cache: true
+    
+      - name: Get version
+        id: get_version
+        run: |
+          if [[ $GITHUB_REF == refs/tags/* ]]; then
+            VERSION=${GITHUB_REF#refs/tags/v}
+          else
+            VERSION=0.0.1-$(git rev-parse --short HEAD)
+          fi
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Sleep for 15 minutes
+        run: sleep 900
+
+      - name: Generate pkg contents in "/build"
+        run: |
+          BASE=build make install
+          ./pkginstall build \
+            --name go-gitlooseleaf \
+            --version ${{ steps.get_version.outputs.version }} \
+            --maintainer "idk <idk@i2pmail.org>" \
+            --description "A modded gitea for hidden services" \
+            --source ./build \
+            --verbose
