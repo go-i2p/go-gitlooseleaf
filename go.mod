@@ -1,4 +1,4 @@
-module github.com/go-i2p/go-gittisane
+module code.gitea.io/gitea
 
 go 1.24.2
 
