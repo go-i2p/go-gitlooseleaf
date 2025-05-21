@@ -44,7 +44,9 @@ setup-user:
 		--disabled-password \
 		--home /home/git \
 		git
-	mkdir -p $(DATA_PATH)/{custom,data,log}
+	mkdir -p $(DATA_PATH)/custom
+	mkdir -p $(DATA_PATH)/data
+	mkdir -p $(DATA_PATH)/log
 	mkdir -p $(CONFIG_PATH)
 	chown -R git:git $(DATA_PATH)/
 	chmod -R 750 $(DATA_PATH)/
