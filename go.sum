@@ -8,8 +8,8 @@ github.com/go-i2p/go-limit v0.0.0-20250203203118-210616857c15 h1:ASjMbwlepoDQfrh
 github.com/go-i2p/go-limit v0.0.0-20250203203118-210616857c15/go.mod h1:4jjmVRhvKj47sQ6B6wdDhN1IrEZunE6KwkYLQx/BeVE=
 github.com/go-i2p/go-meta-dialer v0.0.0-20250501024057-715e91be3cfe h1:9Rxw2KtMCRKZHI4WavUAaatzKmc64V6kiYvcyTMHjeU=
 github.com/go-i2p/go-meta-dialer v0.0.0-20250501024057-715e91be3cfe/go.mod h1:++xHSOvnGymRSyFbi9A9hztcfwKfU6/nJAtVxrNo8Zo=
-github.com/go-i2p/go-meta-listener v0.0.4 h1:GVO+N1LqWjtGYVyukGiVwIcF46fTtN7ZBozEVGXMefg=
-github.com/go-i2p/go-meta-listener v0.0.4/go.mod h1:wF/MCCfB40gZyT9WtuYWQkUOPrnoTzA+NG0zpsy3s4M=
+github.com/go-i2p/go-meta-listener v0.0.5-0.20250521170131-2058a4309616 h1:EDx3FrzeGSjtYiH6GAF/lKNseNVDDHqR2OY/hQfiOqo=
+github.com/go-i2p/go-meta-listener v0.0.5-0.20250521170131-2058a4309616/go.mod h1:wF/MCCfB40gZyT9WtuYWQkUOPrnoTzA+NG0zpsy3s4M=
 github.com/go-i2p/i2pkeys v0.0.0-20241108200332-e4f5ccdff8c4/go.mod h1:m5TlHjPZrU5KbTd7Lr+I2rljyC6aJ88HdkeMQXV0U0E=
 github.com/go-i2p/i2pkeys v0.33.92 h1:e2vx3vf7tNesaJ8HmAlGPOcfiGM86jzeIGxh27I9J2Y=
 github.com/go-i2p/i2pkeys v0.33.92/go.mod h1:BRURQ/twxV0WKjZlFSKki93ivBi+MirZPWudfwTzMpE=
