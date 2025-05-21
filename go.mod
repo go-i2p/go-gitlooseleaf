@@ -1,11 +1,3 @@
-module code.gitea.io/gitea
-
-go 1.24.2
-
-// rfc5280 said: "The serial number is an integer assigned by the CA to each certificate."
-// But some CAs use negative serial number, just relax the check. related:
-// Default TLS cert uses negative serial number #895 https://github.com/microsoft/mssql-docker/issues/895
-godebug x509negativeserial=1
 
 require (
 	github.com/pkg/errors v0.9.1 // indirect
