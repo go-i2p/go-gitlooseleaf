@@ -1,0 +1,16 @@
+# only if we're root
+
+if [ "$(id -u)" != "0" ]; then
+  echo "This script must be run as root" 1>&2
+  exit 1
+fi
+
+BINARY_PATH=${BASE}/usr/local/bin/gitea
+SYSTEMD_PATH=${BASE}/etc/systemd/system
+CONFIG_PATH=${BASE}/etc/gitea
+DATA_PATH=${BASE}/var/lib/gitea
+
+echo chown -R git:git "$DATA_PATH/"
+echo chmod -R 750 "$DATA_PATH/"
+echo chown root:git "$CONFIG_PATH"
+echo chmod 770 "$CONFIG_PATH"
