@@ -2,7 +2,7 @@
 # Triggered an hour after the Gitea stable build
 # Runs on Ubuntu 22.04
 
-name: Gitea Nightly Debian Build
+name: Gitea Debian Build
 on:
   push:  # Run on any push
   schedule:
