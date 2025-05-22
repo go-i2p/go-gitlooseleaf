@@ -71,15 +71,15 @@ jobs:
         id: date
         run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
 
-      - name: Update Release
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: ${{ needs.check-release.outputs.new_tag }}
-          name: "Gitea ${{ needs.check-release.outputs.new_tag }}"
-          body: "Automated build of Gitea ${{ needs.check-release.outputs.new_tag }}"
-          files: "*.deb"
-          draft: false
-          prerelease: false
-          allowUpdates: true
-          removeArtifacts: false
-          replacesArtifacts: true
+#      - name: Update Release
+#        uses: softprops/action-gh-release@v2
+#        with:
+#          tag_name: ${{ needs.check-release.outputs.new_tag }}
+#          name: "Gitea ${{ needs.check-release.outputs.new_tag }}"
+#          body: "Automated build of Gitea ${{ needs.check-release.outputs.new_tag }}"
+#          files: "*.deb"
+#          draft: false
+#          prerelease: false
+#          allowUpdates: true
+#          removeArtifacts: false
+#          replacesArtifacts: true

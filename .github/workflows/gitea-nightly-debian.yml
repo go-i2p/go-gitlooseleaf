@@ -71,13 +71,13 @@ jobs:
         id: date
         run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
 
-      - name: Create or Update Nightly Release
-        uses: ncipollo/release-action@v1
-        with:
-          tag: nightly
-          artifacts: "*.deb"
-          draft: false
-          prerelease: true
-          allowUpdates: true
-          removeArtifacts: false
-          replacesArtifacts: true
+#      - name: Create or Update Nightly Release
+#        uses: ncipollo/release-action@v1
+#        with:
+#          tag: nightly
+#          artifacts: "*.deb"
+#          draft: false
+#          prerelease: true
+#          allowUpdates: true
+#          removeArtifacts: false
+#          replacesArtifacts: true
