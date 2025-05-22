@@ -119,7 +119,7 @@ A: No, user accounts are shared across all protocols. This is an availability en
 A: Each version is built against a specific Gitea release. Check the releases page for compatibility information.
 
 **Q: Do I need to run Tor and I2P services separately?**  
-A: No, go-gitlooseleaf includes embedded Tor and I2P capabilities, no separate services needed.
+A: Yes, you need to run Tor and I2P routers. 
 
 **Q: Why must the SSH port end with "22"?**  
 A: The automatic protocol detection for SSH connections relies on recognizing the port number pattern. Any port ending in "22" (such as 22, 2222, 10022) will work correctly.
