@@ -37,6 +37,7 @@ download:
 setup-user:
 	@echo "Setting up git user and directories..."
 	./preinst
+	mkdir -p $(BASE)/usr/local/bin
 	mkdir -p $(DATA_PATH)/custom
 	mkdir -p $(DATA_PATH)/data
 	mkdir -p $(DATA_PATH)/log
