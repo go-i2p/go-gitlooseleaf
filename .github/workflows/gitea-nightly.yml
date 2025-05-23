@@ -42,7 +42,6 @@ jobs:
           cp -v ../net_mirror_unix.go modules/graceful/net_mirror_unix.go
           cp -v ../net_mirror_windows.go modules/graceful/net_mirror_windows.go
           cat ../go.mod >> go.mod
-          go mod tidy
           make build
         env:
           TAGS: bindata sqlite sqlite_unlock_notify netgo osusergo
