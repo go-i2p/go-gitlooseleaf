@@ -41,9 +41,7 @@ jobs:
           cp -v ../net_mirror_dialer.go modules/graceful/net_mirror_dialer.go
           cp -v ../net_mirror_unix.go modules/graceful/net_mirror_unix.go
           cp -v ../net_mirror_windows.go modules/graceful/net_mirror_windows.go
-          grep -v 'github.com/go-i2p/go-gitlooseleaf' ../go.mod >> go.mod
-          grep -v 'go 1.2' ../go.mod >> go.mod
-          grep -v '// indirect' ../go.mod >> go.mod
+          grep -v 'github.com/go-i2p/go-gitlooseleaf' ../go.mod | grep -v 'go 1.2' | grep -v '// indirect' >> go.mod
           go mod tidy
           make build
         env:
