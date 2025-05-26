@@ -2,7 +2,7 @@
 # Triggered an hour after the Gitea stable build
 # Runs on Ubuntu 22.04
 
-name: Gitea Nightly Debian Build
+name: Gitea Debian Build
 on:
   push:  # Run on any push
   schedule:
@@ -45,7 +45,7 @@ jobs:
 
       - name: Generate pkg contents in "/build"
         run: |
-          BASE=build make install
+          sudo BASE=build make install
           ./pkginstall build \
             --name go-gitlooseleaf \
             --version ${{ steps.get_version.outputs.version }} \
