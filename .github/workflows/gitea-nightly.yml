@@ -91,3 +91,4 @@ jobs:
           allowUpdates: true
           removeArtifacts: false
           replacesArtifacts: true
+          makeLatest: true
