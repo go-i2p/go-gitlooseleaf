@@ -85,8 +85,8 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           tag: nightly
-          name: "Gitea Nightly Build (${{ steps.date.outputs.date }})"
-          body: "Automated nightly build of Gitea from main branch, built on ${{ steps.date.outputs.date }}"
+          name: "Modded Gitea Nightly Build (${{ steps.date.outputs.date }})"
+          body: "Automated nightly build of modded Gitea from main branch, built on ${{ steps.date.outputs.date }}"
           artifacts: "gitea-Linux/*, gitea-Windows/*, gitea-macOS/*"
           draft: false
           prerelease: true
