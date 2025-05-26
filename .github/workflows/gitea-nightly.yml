@@ -1,4 +1,4 @@
-name: Gitea Nightly Build
+name: Modded Gitea Nightly Build
 on:
   push:  # Run on any push
   schedule:

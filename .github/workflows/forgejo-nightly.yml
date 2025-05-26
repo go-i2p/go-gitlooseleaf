@@ -1,4 +1,4 @@
-name: Forgejo Nightly Build
+name: Modded Forgejo Nightly Build
 on:
   push:  # Run on any push
   schedule:
