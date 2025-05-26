@@ -42,14 +42,6 @@ jobs:
         working-directory: forgejo-source
         run: |
           make clean
-          cp -v ../net_mirror.go modules/graceful/net_mirror.go
-          cp -v ../net_mirror_dialer.go modules/graceful/net_mirror_dialer.go
-          cp -v ../net_mirror_unix.go modules/graceful/net_mirror_unix.go
-          cp -v ../net_mirror_windows.go modules/graceful/net_mirror_windows.go
-          grep -v 'github.com/go-i2p/go-gitlooseleaf' ../go.mod >> go.mod
-          grep -v 'go 1.2' ../go.mod >> go.mod
-          grep -v '// indirect' ../go.mod >> go.mod
-          go mod tidy
           make build
         env:
           TAGS: bindata sqlite sqlite_unlock_notify netgo osusergo
@@ -90,8 +82,8 @@ jobs:
       - name: Create or Update Nightly Release
         uses: ncipollo/release-action@v1
         with:
-          tag: forgejo-nightly
-          name: "Forgejo Nightly Build (${{ steps.date.outputs.date }})"
+          tag: forgejo-nightly-vanilla
+          name: "Standard Forgejo Nightly Build (${{ steps.date.outputs.date }})"
           body: "Automated nightly build of Forgejo from main branch, built on ${{ steps.date.outputs.date }}"
           artifacts: "forgejo-Linux/*, forgejo-Windows/*, forgejo-macOS/*"
           draft: false
