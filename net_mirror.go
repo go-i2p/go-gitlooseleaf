@@ -7,9 +7,11 @@ import (
 	"net"
 	"net/http"
 	"os"
+	"path/filepath"
 
 	"github.com/go-i2p/go-meta-listener/mirror"
 
+	"code.gitea.io/gitea/modules/setting"
 	limitedlistener "github.com/go-i2p/go-limit"
 )
 
@@ -55,7 +57,9 @@ func MultiGetListener(network, address string) (net.Listener, error) {
 		return GetListenerUnixWrapper(network, unixAddr)
 
 	default:
-		ml, err := mirrorListener.Listen(address, EMAIL, "./certs", true)
+		ml, err := mirrorListener.Listen(address, EMAIL)
+		mirror.CERT_DIR = filepath.Join(setting.CustomPath, "certs")
+		mirror.HIDDEN_TLS = true
 		if err != nil {
 			return nil, err
 		}
