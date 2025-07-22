@@ -13,6 +13,7 @@ import (
 
 	"code.gitea.io/gitea/modules/setting"
 	limitedlistener "github.com/go-i2p/go-limit"
+	selectcache "github.com/go-i2p/go-select-cache"
 )
 
 func hostname() string {
@@ -63,10 +64,14 @@ func MultiGetListener(network, address string) (net.Listener, error) {
 		if err != nil {
 			return nil, err
 		}
-		return limitedlistener.NewLimitedListener(ml,
+		config := selectcache.DefaultCacheConfig()
+		config.MaxMemoryMB = 512
+		config.MaxEntries = 10000
+		// Wrap with caching listener
+		return selectcache.NewCachingListener(limitedlistener.NewLimitedListener(ml,
 			limitedlistener.WithMaxConnections(500), // max concurrent
 			limitedlistener.WithRateLimit(24),       // per second
-		), nil
+		), config), nil
 	}
 }
 
