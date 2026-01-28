@@ -68,6 +68,10 @@ jobs:
         with:
           node-version: 22.6.0
 
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
       - name: Checkout Gitea Source
         uses: actions/checkout@v4
         with:
